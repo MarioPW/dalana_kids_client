@@ -20,14 +20,11 @@ export const ProtectedRoute = () => {
           setIsLoading(false);
         }
       };
-  
       checkAuthorization();
     }, []);
   
     if (isLoading) {
       return <MySpinner />;
     }
-  
     return isAuthorized ? <Outlet /> : <Navigate to="/" />;
-  };
-  
+  }

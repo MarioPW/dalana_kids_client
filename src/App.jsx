@@ -7,18 +7,13 @@ import { MyNavbar } from './components/pages/home/MyNavbar'
 import { ProtectedRoute } from './components/protectedRoutes/ProtectedRoute'
 import { useEffect } from 'react'
 import { ConfirmRegister } from './components/pages/login_register/ConfirmRegister'
+import { ResetPasswordForm } from './components/pages/login_register/ResetPasswordForm'
 
 function App() {
 
-  const { setToken, setButtonText } = useUserContext()
+  const { user } = useUserContext()
 
-  useEffect(() => {
-    const token = sessionStorage.getItem('dalanaKidsSession')
-    if (token) {
-      setToken(token)
-      setButtonText("Salir")
-    }
-  }, [])
+
   return (
     <>
       <MyNavbar />
@@ -27,6 +22,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<RegisterForm />} />
           <Route path='/confirm-register' element={<ConfirmRegister />} />
+          <Route path='/reset_password_form/:token' element={<ResetPasswordForm />} />
           <Route element={<ProtectedRoute />}>
             <Route path='/dashboard' element={<Dashboard />} />
           </Route>

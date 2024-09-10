@@ -35,16 +35,7 @@ export const ListOfProducts = () => {
       setProduct(selectedProduct[0])
     }
   }
-  const model = {
-    "id": 0,
-    "name": "string",
-    "price": 0,
-    "available_amount": 0,
-    "brand": "string",
-    "description": "string",
-    "category_name": "string",
-    "img_url": "string"
-  }
+
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 ">
       <div className="flex justify-between items-center border-solid border-b-2 border-gray-300 w-full">
@@ -58,7 +49,7 @@ export const ListOfProducts = () => {
         {products.map((item) => (
           <li key={item.id} className="flex justify-between gap-x-6 py-5">
             <div className="flex min-w-0 gap-x-4">
-              <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={item.img_url} alt={`Imagen de: ${item.description}`}/>
+              <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={item.images[0].url} alt={`Imagen de: ${item.description}`}/>
               <div className="min-w-0 flex-auto">
                 <p className="text-sm font-semibold leading-6 text-gray-900">{item.name}</p>
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">{item.description}</p>

@@ -38,7 +38,7 @@ export const CategoryForm = () => {
                 <input
                   type="text"
                   name="category-name"
-                  id="category"
+                  id="category-name"
                   autoComplete="username"
                   placeholder='Una o dos palabras'
                   onChange={handleChange}
@@ -57,7 +57,7 @@ export const CategoryForm = () => {
                 <input
                   type="text"
                   name="color"
-                  id="color"
+                  id="category-color"
                   autoComplete="username"
                   placeholder='Una o dos palabras'
                   onChange={handleChange}

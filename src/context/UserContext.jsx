@@ -1,16 +1,14 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { useContext } from "react";
 
 export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
-    const [token, setToken] = useState("")
-    const [buttonText, setButtonText] = useState("Ingresar")
-    const [userEmail, setUserEmail] = useState("")
-    const [password, setUserPassword] = useState("")
-    const [product, setProduct] = useState()
 
-    return  <UserContext.Provider value={{token, setToken, buttonText, setButtonText, setUserEmail, userEmail, password, setUserPassword, product, setProduct }}>{children}</UserContext.Provider>
+    const [product, setProduct] = useState()
+    const [user, setUser] = useState(false)
+
+    return <UserContext.Provider value={{ setUser, user, product, setProduct }}>{children}</UserContext.Provider>
 };
 
 export const useUserContext = () => {

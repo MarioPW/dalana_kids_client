@@ -11,7 +11,12 @@ export class ProductServices {
      }
      getImgHost = () => {
           try {
-               return axios.get(`${import.meta.env.VITE_API_URL}/products/image_host`)
+               return axios.get(`${import.meta.env.VITE_API_URL}/products/image_host/`, {
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `bearer ${localStorage.getItem('token')}`
+                    }
+               })
           } catch (error) {
                console.error('Error al hacer la solicitud:', error.message)
           }
@@ -21,10 +26,8 @@ export class ProductServices {
                return axios.post(`${import.meta.env.VITE_API_URL}/products`, product, {
                     headers: {
                       'Content-Type': 'application/json',
-                      'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('dalanaKidsToken'))}`
+                      'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
-                  }).then((response) => {
-                    console.log(response.data);
                   })
           } catch (error) {
                console.error('Error al hacer la solicitud:', error.message);

@@ -32,15 +32,7 @@ export const ProductForm = () => {
 
   const categoriesService = new CategoriesService();
   const productService = new ProductServices()
-  const [formValues, setFormValues] = useState({
-    name: "",
-    price: "",
-    stock: "",
-    brand: "",
-    description: "",
-    category: "",
-    size: ""
-  })
+  const [formValues, setFormValues] = useState({})
 
   useEffect(() => {
     const getCategories = async () => {
@@ -59,20 +51,30 @@ export const ProductForm = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
+    console.log(formValues)
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const image = e.target.image.files[0];
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "images");
+    const images = e.target.images.files;
+    const uploadedImageUrls = [];
+    const url = await productService.getImgHost();
     setLoading(true);
-    const url = productService.getImgHost()
-    const res = await fetch(url, {
-      method: "POST",
-      body: data
-    })
-    const imageUrl = await res.json();
+
+    for (const image of images) {
+      const data = new FormData();
+      data.append("file", image);
+      data.append("upload_preset", "images");
+
+      const res = await fetch(url.data, {
+        method: "POST",
+        body: data
+      });
+
+      const imageUrl = await res.json();
+
+      uploadedImageUrls.push(imageUrl.secure_url);
+    }
+
     setLoading(false);
     const new_product = {
       name: formValues.name,
@@ -81,22 +83,18 @@ export const ProductForm = () => {
       brand: formValues.brand,
       description: formValues.description,
       category_name: formValues.category,
-      img_url: imageUrl.secure_url,
+      images: uploadedImageUrls,
       size: formValues.size,
     }
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/products`, new_product, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${JSON.parse(localStorage.getItem('dalanaKidsToken')).access_token}`
-        }
-      })
+      const response = await productService.createProduct(new_product)
+      
       console.log(response.data)
       setRes200(JSON.stringify(response.data))
     } catch (error) {
       if (error) {
-        setResError(JSON.stringify(error.response.statusText))
-        console.log(error.response)
+        setResError(JSON.stringify(error.response))
+        console.log(error)
       }
     }
   }
@@ -110,7 +108,7 @@ export const ProductForm = () => {
           <div className='items-center block h-12 border-b-2 sm:flex '>
             <h2 className="leading-7 text-2x1">Formulario para agregar nuevos productos.</h2>
           </div>
-          
+
           <div className="sm:col-span-4">
             <label htmlFor="name" className="block pt-4 text-sm font-medium leading-6 text-gray-900">
               Nombre del producto
@@ -244,7 +242,7 @@ export const ProductForm = () => {
                   className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                 /> */}
                 <select
-                  name="category"
+                  name="category_name"
                   id="category"
                   value={categories[0]}
                   onChange={handleInputChange}
@@ -261,7 +259,7 @@ export const ProductForm = () => {
           </div>
 
           <div className="col-span-full">
-            <label htmlFor="cover-photo" className="block pt-4 text-sm font-medium leading-6 text-gray-900">
+            <label className="block pt-4 text-sm font-medium leading-6 text-gray-900">
               Imagen
             </label>
             <div className="flex justify-center px-6 py-10 mt-2 border border-dashed rounded-lg border-gray-900/25">
@@ -269,11 +267,11 @@ export const ProductForm = () => {
                 <PhotoIcon className="w-12 h-12 mx-auto text-gray-300" aria-hidden="true" />
                 <div className="flex mt-4 text-sm leading-6 text-gray-600">
                   <label
-                    htmlFor="image"
+                    htmlFor="images"
                     className="relative font-semibold text-indigo-600 bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                   >
                     <span>Cargar o Arrasrar Imagen</span>
-                    <input id="image" name="image" type="file" className="sr-only" accept="image/*" />
+                    <input id="images" name="images" type="file" className="sr-only" accept="image/*" multiple />
                   </label>
                 </div>
                 <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
