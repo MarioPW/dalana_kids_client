@@ -3,16 +3,12 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { LoginModal } from '../../login_register/LoginModal'
 import { useUserContext } from '../../../../context/UserContext';
-import { DashboardButton } from '../../dashboard/DashboardButton';
 import { ShopingCart } from './ShopingCart';
 import { ProfileDropdown } from './ProfileDropdown'
 import { useEffect } from 'react';
 
 const navigation = [
   { name: 'Home', href: '/', bgColor: 'bg-orange-500', current: false },
-  // { name: 'Niñas', href: '#', bgColor: 'bg-red-500', current: false },
-  // { name: 'Niños', href: '#', bgColor: 'bg-blue-600', current: false },
-  // { name: 'Accesorios', href: '#', bgColor: 'bg-green-500', current: false },
 ]
 
 function classNames(...classes) {
@@ -22,11 +18,9 @@ function classNames(...classes) {
 export const MyNavbar = () => {
   const { user } = useUserContext()
 
-  useEffect(() => {
-    if (user) {
-      console.log("Hola " + user.name);
-    }
-  }, [user]);
+  useEffect(() => {}, [user]);
+   
+  
 
   return (
     <div className='fixed top-0 z-50 w-full mx-auto'>
@@ -70,7 +64,6 @@ export const MyNavbar = () => {
                           {item.name}
                         </Link>
                       ))}
-                      {user.role == "admin" && <DashboardButton />}
                     </div>
 
                   </div>
@@ -100,7 +93,6 @@ export const MyNavbar = () => {
                     {item.name}
                   </DisclosureButton>
                 ))}
-                {user.role == "admin" && <DashboardButton />}
               </div>
             </DisclosurePanel>
           </>

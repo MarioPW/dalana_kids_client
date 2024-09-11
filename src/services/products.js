@@ -38,9 +38,9 @@ export class ProductServices {
           try {
                return axios.delete(`${import.meta.env.VITE_API_URL}/products/${id}?id=${id}`, {
                     headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('dalanaKidsToken'))}`
-                    }
+                         'Content-Type': 'application/json',
+                         'Authorization': `bearer ${localStorage.getItem('token')}`
+                       }
                   }).then((response) => {
                     console.log(response.data);
                   })

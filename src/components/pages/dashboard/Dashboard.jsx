@@ -3,7 +3,6 @@ import { ListOfProducts } from './products/ListOfProducts';
 import { CategoryForm } from './categories/CategoryForm';
 import { useState } from 'react'
 
-
 export const Dashboard = () => {
   const [isOpenNewProduct, setIsOpenNewProduct] = useState(false);
   const [isOpenListOfProducts, setIsOpenListOfProducts] = useState(false);

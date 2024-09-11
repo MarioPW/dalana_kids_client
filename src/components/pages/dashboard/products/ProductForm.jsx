@@ -1,25 +1,10 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-
-  TODO:
+/*  TODO:
   - ADD FORM VALIDATION
   - ADD SPINNER
   - ADD ERROR HANDLING
 */
 import { PhotoIcon } from '@heroicons/react/24/solid'
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Alert } from 'flowbite-react';
 import { CategoriesService } from '../../../../services/categories';
 import { ProductServices } from '../../../../services/products';
@@ -69,9 +54,7 @@ export const ProductForm = () => {
         method: "POST",
         body: data
       });
-
       const imageUrl = await res.json();
-
       uploadedImageUrls.push(imageUrl.secure_url);
     }
 
@@ -106,7 +89,7 @@ export const ProductForm = () => {
       <div className="p-8 mt-8 space-y-12">
         <div>
           <div className='items-center block h-12 border-b-2 sm:flex '>
-            <h2 className="leading-7 text-2x1">Formulario para agregar nuevos productos.</h2>
+            <h2 className="leading-7 text-2x2 font-semibold text-purple-600">Formulario para agregar nuevos productos.</h2>
           </div>
 
           <div className="sm:col-span-4">
@@ -251,7 +234,7 @@ export const ProductForm = () => {
 
           <div className="col-span-full">
             <label className="block pt-4 text-sm font-medium leading-6 text-gray-900">
-              Imagen
+              Imágenes <span className='italic text-gray-500'>(Recomendado: 3 a 6 imágenes; se deben seleccionar todas al tiempo y ahí si cargarlas mientras...)</span>
             </label>
             <div className="flex justify-center px-6 py-10 mt-2 border border-dashed rounded-lg border-gray-900/25">
               <div className="text-center">
