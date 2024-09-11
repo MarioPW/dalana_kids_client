@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { LoginModal } from '../login_register/LoginModal'
-import { useUserContext } from '../../../context/UserContext';
-import { DashboardButton } from '../dashboard/DashboardButton';
-import { ShopingCart } from './navbar/ShopingCart';
-import { ProfileDropdown } from './navbar/ProfileDropdown'
+import { LoginModal } from '../../login_register/LoginModal'
+import { useUserContext } from '../../../../context/UserContext';
+import { DashboardButton } from '../../dashboard/DashboardButton';
+import { ShopingCart } from './ShopingCart';
+import { ProfileDropdown } from './ProfileDropdown'
 import { useEffect } from 'react';
 
 const navigation = [
