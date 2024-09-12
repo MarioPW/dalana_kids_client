@@ -19,8 +19,6 @@ export const MyNavbar = () => {
   const { user } = useUserContext()
 
   useEffect(() => {}, [user]);
-   
-  
 
   return (
     <div className='fixed top-0 z-50 w-full mx-auto'>
