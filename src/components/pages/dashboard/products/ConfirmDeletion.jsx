@@ -1,14 +1,9 @@
-
-"use client";
-
 import { Button, Modal } from "flowbite-react";
 import { useState } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useUserContext } from "../../../../context/UserContext";
 import { ProductServices } from "../../../../services/products";
-
-
 
 export const ConfirmDeletion = () => {
   const productServices = new ProductServices();
