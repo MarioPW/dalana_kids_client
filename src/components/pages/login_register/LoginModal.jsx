@@ -39,7 +39,7 @@ export function LoginModal() {
     const emailInputValue = document.querySelector('#email').value
     if (emailInputValue && emailRegex.test(emailInputValue)) {
         const response = await service.forgotPassword(email)
-        response.status === 200 && alert("Hemos enviado un correo para restablecer tu contraseña. Revísalo para poder ingresar.")
+        response.status === 200 && alert("Hemos enviado un correo para restablecer tu contraseña. Revísalo para ingresar de nuevo.")
         response.status === 404 && alert("Correo no encontrado.")
     } else {alert("Debes ingresar un correo valido")}
   }

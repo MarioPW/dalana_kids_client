@@ -9,6 +9,13 @@ export class ProductServices {
                console.error('Error al hacer la solicitud:', error.message);
           }
      }
+     getProductById = (id) => {
+          try {
+               return axios.get(`${import.meta.env.VITE_API_URL}/products/{product_id}?id=${id}`)
+          } catch (error) {
+               console.error('Error al hacer la solicitud:', error.message);
+          }
+     }
      getImgHost = () => {
           try {
                return axios.get(`${import.meta.env.VITE_API_URL}/products/image_host/`, {

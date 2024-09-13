@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { ProductCards } from './ProductCards'
+import { ProductCards } from './productsSection/ProductCards'
 import { MyCarousel } from './MyCarousel'
 import { SocialContainer } from './socialContainer'
 import { MyFooter } from './Footer'
 import { MySideBar } from './sideBar/MySideBar'
 import { jwtDecode } from 'jwt-decode'
 import { useUserContext } from '../../../context/UserContext'
+import { Outlet } from 'react-router-dom'
 
 export const Home = () => {
     const { setUser } = useUserContext()
@@ -24,7 +25,7 @@ export const Home = () => {
             <SocialContainer />
             <div className='block sm:flex'>
                 <MySideBar />
-                <ProductCards />
+                <Outlet />
             </div>
             <MyFooter />
         </>

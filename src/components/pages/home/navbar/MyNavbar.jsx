@@ -7,20 +7,16 @@ import { ShopingCart } from './ShopingCart';
 import { ProfileDropdown } from './ProfileDropdown'
 import { useEffect } from 'react';
 
-const navigation = [
-  { name: 'Home', href: '/', bgColor: 'bg-orange-500', current: false },
-]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
 export const MyNavbar = () => {
   const { user } = useUserContext()
-
-  useEffect(() => {}, [user]);
-   
+  const navigation = [
+    { name: 'Home', href: '/', bgColor: 'bg-orange-500', current: false },
+  ]
   
+  const classNames = (...classes) => {
+    classes.filter(Boolean).join(' ')}
+  useEffect(() => {}, [user]);
 
   return (
     <div className='fixed top-0 z-50 w-full mx-auto'>
