@@ -1,16 +1,20 @@
 import React, { Fragment } from 'react'
-
+import { TbMoodKid } from "react-icons/tb";
 import { Menu, Transition, MenuButton, MenuItems, MenuItem } from '@headlessui/react'
+import { Link } from 'react-router-dom'
+import { useUserContext } from '../../../../context/UserContext'
 
 
-export const ProfileDropdown = ({user}) => {
+export const ProfileDropdown = ({ user }) => {
+    const { setUser } = useUserContext()
+
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
-      }
-      const handleSignOut = () => {
+    }
+    const handleSignOut = () => {
         localStorage.removeItem("token")
-        window.location.reload()
-      }
+        // setUser(null)
+    }
     return (
         <Menu as="div" className="relative ml-3">
             <div>
@@ -19,8 +23,8 @@ export const ProfileDropdown = ({user}) => {
                     <span className="sr-only">Open user menu</span>
                     <img
                         className="w-8 h-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt0XikLERJ8A3kTEC6_j9lMiLFu7-27j_AyA&s"
+                        alt= {user.name ? user.name : user.email}
                     />
                 </MenuButton>
 
@@ -58,15 +62,16 @@ export const ProfileDropdown = ({user}) => {
                     <MenuItem>
                         {({ active }) => (
                             <a href="#" className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            >Settings</a>    
+                            >Settings</a>
                         )}
                     </MenuItem>
                     <MenuItem>
                         {({ active }) => (
-                            <a href=""
+                            <Link
+                                to="/"
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                 onClick={handleSignOut}>
-                            Cerrar Sesión</a>
+                                Cerrar Sesión</Link>
                         )}
                     </MenuItem>
                 </MenuItems>

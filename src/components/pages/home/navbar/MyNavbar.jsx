@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 export const MyNavbar = () => {
   const { user } = useUserContext()
   const navigation = [
-    { name: 'Home', href: '/', bgColor: 'bg-orange-500', current: false },
+    { name: 'Home', href: '/', color: 'bg-orange-500', current: false },
   ]
   
   const classNames = (...classes) => {
@@ -52,7 +52,7 @@ export const MyNavbar = () => {
                           key={item.name}
                           to={item.href}
                           className={classNames(
-                            item.current ? 'bg-white-600 text-white' : `${item.bgColor} text-white hover:bg-green-500 hover:text-white`,
+                            item.current ? 'bg-white-600 text-white' : `${item.color} text-white hover:bg-green-500 hover:text-white`,
                             'rounded-md px-3 py-2 text-sm font-medium'
                           )}
                           aria-current={item.current ? 'page' : undefined}
@@ -76,18 +76,17 @@ export const MyNavbar = () => {
             <DisclosurePanel className="sm:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
-                  <DisclosureButton
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    className={classNames(
+                  <Link
+                  key={item.name}
+                  to={item.href}
+                  className={classNames(
                       item.current ? 'bg-blue-800 text-white' : 'text-gray-300 hover:bg-blue-700 hover:text-white',
                       'block rounded-md px-3 py-2 text-base font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}
                   >
                     {item.name}
-                  </DisclosureButton>
+                  </Link>
                 ))}
               </div>
             </DisclosurePanel>

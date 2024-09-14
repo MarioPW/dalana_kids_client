@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   publicDir: 'public',
-  base: "https://mariopw.github.io/dalana_kids_client/",
+  base: "https://mariopw.github.io/dalanakids/",
   build: {
     assetsDir: 'assets',
   }
