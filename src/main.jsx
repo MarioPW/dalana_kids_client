@@ -7,7 +7,7 @@ import { UserProvider } from './context/UserContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <UserProvider>
-    <BrowserRouter>
+    <BrowserRouter  basename="/dalana_kids_client">
       <App />
     </BrowserRouter>
   </UserProvider>,
