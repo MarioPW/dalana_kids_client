@@ -2,38 +2,42 @@ import axios from "axios"
 
 
 export class ProductServices {
+     constructor() { 
+          this.apiURL = "https://products-api-fnrx.onrender.com/api/v1"
+          this.token = localStorage.getItem('token')
+          this.headers = {
+               'Content-Type': 'application/json',
+               'Authorization': `Bearer ${this.token}`
+          }
+
+     }
      getAllProducts = () => {
           try {
-               return axios.get(`${import.meta.env.VITE_API_URL}/products`)
+               return axios.get(`${this.apiURL}/products`)
           } catch (error) {
                console.error('Error al hacer la solicitud:', error.message);
           }
      }
      getProductById = (id) => {
           try {
-               return axios.get(`${import.meta.env.VITE_API_URL}/products/{product_id}?id=${id}`)
+               return axios.get(`${this.apiURL}/products/{product_id}?id=${id}`)
           } catch (error) {
                console.error('Error al hacer la solicitud:', error.message);
           }
      }
      getImgHost = () => {
           try {
-               return axios.get(`${import.meta.env.VITE_API_URL}/products/image_host/`, {
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': `bearer ${localStorage.getItem('token')}`
-                    }
-               })
+               return axios.get(`${this.apiURL}/products/image_host/`, {headers: this.headers})
           } catch (error) {
                console.error('Error al hacer la solicitud:', error.message)
           }
      }
      createProduct = (product) => {
           try {
-               return axios.post(`${import.meta.env.VITE_API_URL}/products`, product, {
+               return axios.post(`${this.apiURL}/products`, product, {
                     headers: {
                       'Content-Type': 'application/json',
-                      'Authorization': `Bearer ${localStorage.getItem('token')}`
+                      'Authorization': `Bearer ${this.token}`
                     }
                   })
           } catch (error) {
@@ -41,16 +45,8 @@ export class ProductServices {
           }
      }
      deleteProduct = (id) => {
-          console.log(id)
           try {
-               return axios.delete(`${import.meta.env.VITE_API_URL}/products/${id}?id=${id}`, {
-                    headers: {
-                         'Content-Type': 'application/json',
-                         'Authorization': `bearer ${localStorage.getItem('token')}`
-                       }
-                  }).then((response) => {
-                    console.log(response.data);
-                  })
+               return axios.delete(`${this.apiURL}/products/${id}?id=${id}`, {headers: this.headers})
           } catch (error) {
                console.error('Error al hacer la solicitud:', error.message);
           }

@@ -1,23 +1,24 @@
 import axios from "axios";
 export class CategoriesService {
     constructor() {
-        this.apiURL = import.meta.env.VITE_API_URL
+        this.apiURL = "https://products-api-fnrx.onrender.com/api/v1"
     }
 
-    getAllCategories = async () => {
+    getAllCategories = () => {
         try {
-            const response = await axios.get(`${this.apiURL}/categories`)
-            return response.data
+            return axios.get(`${this.apiURL}/categories`)
         } catch (error) {   
             console.error('Error al hacer la solicitud:', error.message);
         }
     }
-    createCategory = async (category) => {
+    createCategory = (category) => {
         try {
-            const response = await axios.post(`${this.apiURL}/categories`, category, {
-                withCredentials: true,
+            const response = axios.post(`${this.apiURL}/categories`, category, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `bearer ${localStorage.getItem('token')}`
+                  }
             })
-
             return response
         } catch (error) {
             console.error('Error al hacer la solicitud:', error.message);
@@ -28,7 +29,7 @@ export class CategoriesService {
             const response = await axios.delete(`${this.apiURL}/categories/${id}?id=${id}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('dalanaKidsSession'))}`
+                    'Authorization': `bearer ${localStorage.getItem('token')}`
                 }
             })
             return response.data
