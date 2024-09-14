@@ -13,7 +13,7 @@ export const ProfileDropdown = ({ user }) => {
     }
     const handleSignOut = () => {
         localStorage.removeItem("token")
-        // setUser(null)
+        location.reload()
     }
     return (
         <Menu as="div" className="relative ml-3">
