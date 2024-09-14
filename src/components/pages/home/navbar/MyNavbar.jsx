@@ -7,17 +7,15 @@ import { ShopingCart } from './ShopingCart';
 import { ProfileDropdown } from './ProfileDropdown'
 import { useEffect } from 'react';
 
-const navigation = [
-  { name: 'Home', href: '/', bgColor: 'bg-orange-500', current: false },
-]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
 export const MyNavbar = () => {
   const { user } = useUserContext()
-
+  const navigation = [
+    { name: 'Home', href: '/', bgColor: 'bg-orange-500', current: false },
+  ]
+  
+  const classNames = (...classes) => {
+    classes.filter(Boolean).join(' ')}
   useEffect(() => {}, [user]);
 
   return (
@@ -43,7 +41,7 @@ export const MyNavbar = () => {
                   <a to="/" className="flex items-center flex-shrink-0">
                     <img
                       className="w-auto rounded-md h-14"
-                      src="../../../src/assets/dalanaKidsLogo.png"
+                      src="/assets/dalanaKidsLogo.png"
                       alt="Dalana Kids Logo"
                     />
                   </a>

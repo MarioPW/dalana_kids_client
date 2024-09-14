@@ -5,16 +5,15 @@ import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-
 export const MyFooter = () => {
   return (
     <Footer container className='bg-yellow-300'>
-      <div className="w-full ">
+      <div className="w-full">
         <div className="grid justify-between w-full sm:flex sm:justify-between md:flex md:grid-cols-1">
-          <div>
+          <div className='flex font-bold text-white font-size-xl'>
             <Footer.Brand
-              href="#"
-              src="src\assets\dalanaKidsLogo.png"
+              src="assets/dalanaKidsLogo.png"
               alt="Dalana Kids Logo"
               name="Dalana Kids"
-              className='text-white'
-            />
+              className='h-12 rounded-md sm:h-28'
+            />Dalana Kids
           </div>
           <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
             <div >

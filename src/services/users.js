@@ -1,10 +1,12 @@
 
-import { none } from '@cloudinary/url-gen/qualifiers/progressive';
 import axios from 'axios';
 
 export class UserServices {
+    constructor() {
+        this.apiURL = "https://products-api-fnrx.onrender.com/api/v1"
+     }
     async login(email, password) {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`,
+            const response = await axios.post(`${this.apiURL}/auth/login`,
                 new URLSearchParams({
                     username: email,
                     password: password
@@ -22,7 +24,7 @@ export class UserServices {
             password_confirm: password2
         }
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, request);
+            const response = await axios.post(`${this.apiURL}/auth/register`, request);
             return response;
         } catch (error) {
             console.error("Error registering:", error.message);
@@ -37,7 +39,7 @@ export class UserServices {
             code: parseInt(code)
         }
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/confirm`, req)
+            const response = await axios.post(`${this.apiURL}/auth/confirm`, req)
             return response
         } catch (error) {
             console.error("Error registering:", error.message);
@@ -49,7 +51,7 @@ export class UserServices {
             if (!token) {
                 throw new Error("No token found. Please log in.");
             }
-            const res = await axios.delete(`${import.meta.env.VITE_API_URL}/auth/delete/${user_id}`, {
+            const res = await axios.delete(`${this.apiURL}/auth/delete/${user_id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -69,7 +71,7 @@ export class UserServices {
     }
     async forgotPassword(email) {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/forgot_password/?email=${email}`)
+            const response = await axios.post(`${this.apiURL}/auth/forgot_password/?email=${email}`)
             return response
         } catch (error) {
             return error.response
@@ -78,7 +80,7 @@ export class UserServices {
 
     async resetPassword(data) {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/reset_password`, data)
+            const response = await axios.post(`${this.apiURL}/auth/reset_password`, data)
             return response
         } catch (error) {
             console.error("Error registering:", error.message);
@@ -92,10 +94,11 @@ export class UserServices {
     async checkAuthorization() {
         try {
             const token = localStorage.getItem('token')
-            const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/check_authorization`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
+            const res = await axios.get(`${this.apiURL}/users/check_authorization`, {
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${token}`
+                    }
             })
             return res.data
         } catch (error) {

@@ -5,12 +5,12 @@ import { CategoriesService } from '../../../../services/categories'
 
 export const CategoryForm = () => {
   const service = new CategoriesService()
-  const [category, setCategory] = useState({})
-  const [color, setColor] = useState({})
+  const [categoryName, setCategory] = useState({})
+  const [categoryColor, setColor] = useState({})
 
   const setters = {
-    category: setCategory,
-    color: setColor
+    categoryName: setCategory,
+    categoryColor: setColor
   }
   const handleChange = (e) => {
     setters[e.target.id](e.target.value)
@@ -18,11 +18,11 @@ export const CategoryForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const data = {
-      name: category,
-      color: color
+      name: categoryName,
+      color: categoryColor
     }
     const response = await service.createCategory(data)
-    response.status == 200 ? alert("Categoría creada") : alert(`${response}`)
+    response.status == 200 ? alert("Categoría creada") : alert(`${response.data}`)
   }
   return (
     <form onSubmit={handleSubmit} >
@@ -30,15 +30,15 @@ export const CategoryForm = () => {
       <div className="p-8 mt-8 space-y-12">
         <div className='block sm:gap-2'>Crear Categoría de productos
           <div className="block sm:col-span-4">
-            <label htmlFor="category-name" className="block pt-4 text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="categoryName" className="block pt-4 text-sm font-medium leading-6 text-gray-900">
               Categoría
             </label>
             <div className="mt-2">
               <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                 <input
                   type="text"
-                  name="category-name"
-                  id="category-name"
+                  name="categoryName"
+                  id="categoryName"
                   autoComplete="username"
                   placeholder='Una o dos palabras'
                   onChange={handleChange}
@@ -49,15 +49,15 @@ export const CategoryForm = () => {
           </div>
 
           <div className="sm:col-span-4">
-            <label htmlFor="category-color" className="block pt-4 text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="categoryColor" className="block pt-4 text-sm font-medium leading-6 text-gray-900">
               Color
             </label>
             <div className="mt-2">
               <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                 <input
                   type="text"
-                  name="color"
-                  id="category-color"
+                  name="categoryColor"
+                  id="categoryColor"
                   autoComplete="username"
                   placeholder='Una o dos palabras'
                   onChange={handleChange}

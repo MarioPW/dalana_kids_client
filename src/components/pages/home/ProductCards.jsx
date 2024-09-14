@@ -21,13 +21,13 @@ export function ProductCards() {
   }, [])
 
   return (
-    <div className="block sm:grid p-4 grid-cols-2 sm:gap-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="block grid-cols-2 p-4 sm:grid sm:gap-2 lg:grid-cols-3 xl:grid-cols-4">
       {products.map(product => (
         <div
-          className="max-w-sm object-cover w-full h-full p-2 border rounded-md shadow-md"
+          className="object-cover w-full h-full max-w-sm p-2 border rounded-md shadow-md"
           key={product.id}
         >
-          <div className="w-full h-72 overflow-hidden flex items-center bg-gray-200">
+          <div className="flex items-center w-full overflow-hidden bg-gray-200 h-72">
             <img
               src={product.images[1]["url"]}
               alt={product.name}

@@ -36,7 +36,7 @@ export function MySideBar() {
         <div>
             <button
                 onClick={toggleSidebar}
-                className="p-2 top-16 left-0 sm:mt-4  text-orange-500 bg-transparent rounded-md md:hidden fixed sm:left-4 z-50">
+                className="fixed left-0 z-50 p-2 text-orange-500 bg-transparent rounded-md top-16 md:hidden">
             
                 <HiMenu className="w-6 h-6" />
             </button>

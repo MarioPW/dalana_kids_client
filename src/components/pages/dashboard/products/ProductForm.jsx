@@ -23,9 +23,7 @@ export const ProductForm = () => {
     const getCategories = async () => {
       try {
         const res = await categoriesService.getAllCategories();
-        if (res.length > 0) {
-          setCategories(res)
-        }
+        setCategories(res.data)
       } catch (error) {
         console.log(error.message)
       }
@@ -36,7 +34,6 @@ export const ProductForm = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-    console.log(formValues)
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,7 +86,7 @@ export const ProductForm = () => {
       <div className="p-8 mt-8 space-y-12">
         <div>
           <div className='items-center block h-12 border-b-2 sm:flex '>
-            <h2 className="leading-7 text-2x2 font-semibold text-purple-600">Formulario para agregar nuevos productos.</h2>
+            <h2 className="font-semibold leading-7 text-purple-600 text-2x2">Formulario para agregar nuevos productos.</h2>
           </div>
 
           <div className="sm:col-span-4">
@@ -218,11 +215,11 @@ export const ProductForm = () => {
                 <select
                   name="category_name"
                   id="category"
-                  value={categories[0]}
+                  // value={categories[0]}
                   onChange={handleInputChange}
                   className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                 >
-                  {categories.map((category) => (
+                  {categories && categories.map((category) => (
                     <option key={category.id} value={category.name}>
                       {category.name}
                     </option>
