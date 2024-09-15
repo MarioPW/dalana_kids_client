@@ -21,9 +21,7 @@ export function MySideBar() {
         const getCategories = async () => {
             try {
                 const res = await categoriesService.getAllCategories();
-                if (res.length > 0) {
-                    setCategories(res)
-                }
+                setCategories(res.data)
             } catch (error) {
                 console.log(error.message)
             }

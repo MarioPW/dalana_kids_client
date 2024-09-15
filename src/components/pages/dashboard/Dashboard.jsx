@@ -2,6 +2,7 @@ import { ProductForm } from './products/ProductForm';
 import { ListOfProducts } from './products/ListOfProducts';
 import { CategoryForm } from './categories/CategoryForm';
 import { useState } from 'react'
+import { CarouselForm } from './carousel/CarouselForm';
 
 export const Dashboard = () => {
   const [isOpenNewProduct, setIsOpenNewProduct] = useState(false);
@@ -116,7 +117,7 @@ export const Dashboard = () => {
       To: "transform opacity-0 scale-95"
       -->*/}
       <div className="right-0 z-10 w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
-       {isOpenCarousel && <h2>Carousel</h2>}
+       {isOpenCarousel && <CarouselForm />}
       </div>
     </div>
   )
