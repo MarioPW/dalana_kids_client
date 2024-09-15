@@ -24,7 +24,7 @@ export function ProductCards() {
   }, [])
   return (
     <div className="block grid-cols-2 py-4 ps-4 sm:grid sm:gap-2 lg:grid-cols-3 xl:grid-cols-4">
-      {!products ? <ProductCardsSkeleton amount={12} /> : products.map(product => (
+      {products ? <ProductCardsSkeleton amount={12} /> : products.map(product => (
         <Link to={`/description/${product.id}`} key={product.id}>
           <div className="flex object-cover w-full h-full max-w-sm p-2 border-b-2 sm:rounded-md sm:shadow-md sm:border sm:block">
             <div className="flex items-center h-32 overflow-hidden bg-gray-200 min-w-36 sm:w-full sm:h-72">
@@ -36,7 +36,7 @@ export function ProductCards() {
                 style={{ viewTransitionName: `image-0` }}
               />
             </div>
-            <div className="m-4 sm:mt-1 ">
+            <div className="m-4 sm:mt-1">
               <div>
                 <h5 className="text-xl tracking-tight text-purple-900 dark:text-white">
                   {product.name}
