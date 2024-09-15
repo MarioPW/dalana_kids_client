@@ -1,13 +1,13 @@
 import React from 'react'
 import { Footer } from "flowbite-react";
-import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
+import { BsFacebook, BsGithub, BsInstagram, BsCode } from "react-icons/bs";
 
 export const MyFooter = () => {
   return (
     <Footer container className='bg-yellow-300'>
       <div className="w-full">
-        <div className="grid justify-between w-full sm:flex sm:justify-between md:flex md:grid-cols-1">
-          <div className='flex font-bold text-white font-size-xl'>
+        <div className="grid w-full sm:justify-between sm:flex md:flex md:grid-cols-1">
+          <div className='flex mb-4 font-semibold text-white font-size-xl'>
             <Footer.Brand
               src="/dalanakids/assets/dalanaKidsLogo.png"
               alt="Dalana Kids Logo"
@@ -15,7 +15,7 @@ export const MyFooter = () => {
               className='h-12 rounded-md sm:h-28'
             />Dalana Kids
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
+          <div className="flex flex-row gap-6 sm:gap-14">
             <div >
               <Footer.Title className='text-white' title="Nosotros" />
               <Footer.LinkGroup col className='text-white'>
@@ -41,13 +41,11 @@ export const MyFooter = () => {
         </div>
         <Footer.Divider />
         <div className="w-full sm:flex sm:items-center sm:justify-between">
-          <Footer.Copyright href="#" by="Flowbite™" year={2022} />
+          <Footer.Copyright href="#" by="Flowbite™" year={2024}/>
           <div className="flex mt-4 space-x-6 sm:mt-0 sm:justify-center " >
             <Footer.Icon href="#" icon={BsFacebook} className='text-white'/>
             <Footer.Icon href="#" icon={BsInstagram} className='text-white'/>
-            <Footer.Icon href="#" icon={BsTwitter} className='text-white'/>
-            <Footer.Icon href="#" icon={BsGithub} className='text-white'/>
-            <Footer.Icon href="#" icon={BsDribbble} className='text-white'/>
+            <Footer.Icon href="#" icon={BsCode} className='text-white'/>
           </div>
         </div>
       </div>
