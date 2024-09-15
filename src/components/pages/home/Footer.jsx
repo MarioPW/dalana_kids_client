@@ -9,7 +9,7 @@ export const MyFooter = () => {
         <div className="grid justify-between w-full sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div className='flex font-bold text-white font-size-xl'>
             <Footer.Brand
-              src="assets/dalanaKidsLogo.png"
+              src="/dalanakids/assets/dalanaKidsLogo.png"
               alt="Dalana Kids Logo"
               name="Dalana Kids"
               className='h-12 rounded-md sm:h-28'

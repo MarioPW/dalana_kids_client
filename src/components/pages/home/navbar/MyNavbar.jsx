@@ -41,7 +41,7 @@ export const MyNavbar = () => {
                   <a to="/" className="flex items-center flex-shrink-0">
                     <img
                       className="w-auto rounded-md h-14"
-                      src="assets/dalanaKidsLogo.png"
+                      src="/dalanakids/assets/dalanaKidsLogo.png"
                       alt="Dalana Kids Logo"
                     />
                   </a>

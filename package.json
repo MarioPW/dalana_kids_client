@@ -3,13 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://mariopw.github.io/dalanakids/",
+  "homepage": "https://mariopw.github.io/dalanakids",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "serve": "vite preview",
-    "predeploy": "npm run build --base=/dalanakids/",
+    "predeploy": "npm run build --base=/dalanakids",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
