@@ -4,7 +4,7 @@ import { ProductServices } from '../../../../services/products'
 import { CarouselService } from '../../../../services/carousel'
 
 export const CarouselForm = () => {
-    const [slug, setSlug] = useState("")
+  const [formValues, setFormValues] = useState({})
     const productService = new ProductServices()
     const carouselService = new CarouselService()
 
@@ -28,23 +28,27 @@ export const CarouselForm = () => {
                 throw new Error("Error al subir la imagen")
             }
             const imageUrl = await res.json()
-            const carouselItem = {
+            const carouselItemSchema = {
                 slug,
                 img_url: imageUrl.secure_url
             }
-            const response = await carouselService.createCarouselItem(carouselItem)
+            const response = await carouselService.createCarouselItem(carouselItemSchema)
             console.log("Elemento de carrusel creado:", response.status === 200 ? "OK" : "FAIL")
 
         } catch (error) {
             console.error("Error al manejar el formulario:", error)
         }
     }
-
-    const handleInputChange = (e) => { 
-        setSlug(e.target.value)
-    }
+    const handleCancelButton = () => {
+        document.querySelector('#carouselForm').reset()
+        setFormValues({})
+      }
+      const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value });
+      }
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id="carouselForm">
             <div className="p-8 mt-8 space-y-12">
             <h2>Formulario para manejo del carrusel</h2>
 
@@ -88,7 +92,7 @@ export const CarouselForm = () => {
                     </div>
                 </div>
                 <div className="flex items-center justify-end mt-6 gap-x-6">
-                    <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+                    <button type="button" className="text-sm font-semibold leading-6 text-gray-900" onClick={handleCancelButton}>
                         Cancelar
                     </button>
                     <button

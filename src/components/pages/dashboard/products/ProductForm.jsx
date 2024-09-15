@@ -35,6 +35,13 @@ export const ProductForm = () => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   }
+
+  const handleCancelButton = () => {
+    document.querySelector('#productForm').reset()
+    setFormValues({})
+  }
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const images = e.target.images.files;
@@ -56,7 +63,7 @@ export const ProductForm = () => {
     }
 
     setLoading(false);
-    const new_product = {
+    const newProductSchema = {
       name: formValues.name,
       price: parseFloat(formValues.price),
       stock: parseInt(formValues.stock),
@@ -67,7 +74,7 @@ export const ProductForm = () => {
       size: formValues.size,
     }
     try {
-      const response = await productService.createProduct(new_product)
+      const response = await productService.createProduct(newProductSchema)
       
       console.log(response.data)
       setRes200(JSON.stringify(response.data))
@@ -79,7 +86,7 @@ export const ProductForm = () => {
     }
   }
   return (
-    <form onSubmit={handleSubmit} >
+    <form onSubmit={handleSubmit} id='productForm'>
       {res200 && <Alert color="success"><span className="font-medium">Ok! </span>{res200}</Alert>}
       {resError && <Alert color="failure"><span className="font-medium">Ups! </span>: {resError}
       </Alert>}
@@ -253,7 +260,7 @@ export const ProductForm = () => {
 
 
         <div className="flex items-center justify-end mt-6 gap-x-6">
-          <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+          <button type="button" className="text-sm font-semibold leading-6 text-gray-900" onClick={handleCancelButton}>
             Cancelar
           </button>
           <button

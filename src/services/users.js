@@ -16,7 +16,7 @@ export class UserServices {
     }
     async register(email, password, password2) {
         const defaultName = "name";
-        const request =
+        const reqSchema =
         {
             user_name: defaultName,
             email: email,
@@ -24,7 +24,7 @@ export class UserServices {
             password_confirm: password2
         }
         try {
-            const response = await axios.post(`${this.apiURL}/auth/register`, request);
+            const response = await axios.post(`${this.apiURL}/auth/register`, reqSchema);
             return response;
         } catch (error) {
             console.error("Error registering:", error.message);
@@ -35,11 +35,11 @@ export class UserServices {
         }
     }
     async confirmRegister(code) {
-        const req = {
+        const reqSchema = {
             code: parseInt(code)
         }
         try {
-            const response = await axios.post(`${this.apiURL}/auth/confirm`, req)
+            const response = await axios.post(`${this.apiURL}/auth/confirm`, reqSchema)
             return response
         } catch (error) {
             console.error("Error registering:", error.message);
@@ -49,7 +49,7 @@ export class UserServices {
         try {
             const token = localStorage.getItem('token');
             if (!token) {
-                throw new Error("No token found. Please log in.");
+                throw new Error("No user token found. Please log in.");
             }
             const res = await axios.delete(`${this.apiURL}/auth/delete/${user_id}`, {
                 headers: {
