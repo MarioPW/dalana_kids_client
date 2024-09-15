@@ -17,6 +17,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto:wght@100&family=Shadows+Into+Light&family=Tangerine:wght@700&family=Titan+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand&family=Roboto:wght@100&family=Shadows+Into+Light&family=Tangerine:wght@700&family=Titan+One&display=swap" rel="stylesheet">
   <title>Dalana Kids</title>
+  <script type="text/javascript">
+    (function (l) {
+      if (l.search[1] === "/") {
+        var decoded = l.search
+          .slice(1)
+          .split("&")
+          .map(function (s) {
+            return s.replace(/~and~/g, "&");
+          })
+          .join("?");
+        window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+      }
+    })(window.location);
+  </script>
 </head>
 
 <body>
