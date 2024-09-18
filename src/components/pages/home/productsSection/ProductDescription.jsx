@@ -1,9 +1,10 @@
 import React from 'react'
-import { Button, Carousel } from "flowbite-react";
+import { Button, Carousel, Badge } from "flowbite-react";
 import { Link } from "react-router-dom";
 
 
 export const ProductDescription = ({ product }) => {
+    console.log(product)
     const handleAddToCart = () => {
         const loggedUser = JSON.parse(localStorage.getItem('token'))
         !loggedUser && alert ('Por favor inicia sesion')
@@ -47,6 +48,9 @@ export const ProductDescription = ({ product }) => {
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                         Categoría: {product.category_name}
                     </p>
+                    <p className="flex gap-1">
+                        Tallas Disponibles: {product.sizes.map
+                            (size => <Badge color="info">{size.size.toUpperCase()}</Badge>)}</p>
                 </div>
                 <div className='flex justify-between gap-2' >
                     <Link to="/" className="flex items-center underline underline-offset-4 text-cyan-700" >Volver</Link>

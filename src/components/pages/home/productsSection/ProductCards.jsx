@@ -49,6 +49,9 @@ export function ProductCards() {
               <p className="font-normal text-red-700 dark:text-gray-400">
                 Marca: {product.brand}
               </p>
+              {product.size !== "Undefined size" && <p className="text-sm font-normal text-gray-700 dark:text-gray-400">
+                Tallas Disponibles: {product.size}</p>}
+              
             </div>
           </div></Link>
       ))}
