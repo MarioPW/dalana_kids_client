@@ -4,12 +4,11 @@ import { Link } from "react-router-dom";
 
 
 export const ProductDescription = ({ product }) => {
-    console.log(product)
     const handleAddToCart = () => {
         const loggedUser = JSON.parse(localStorage.getItem('token'))
-        !loggedUser && alert ('Por favor inicia sesion')
+        !loggedUser && alert('Por favor inicia sesion')
     }
-    
+
     return (
         <div className="grid w-full max-w-screen-lg grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
             {/* Carousel */}
@@ -22,7 +21,7 @@ export const ProductDescription = ({ product }) => {
                             alt={product.name}
                             className="object-cover w-full h-full"
                             loading="lazy"
-                            style={{ viewTransitionName: `image-${index}`}}
+                            style={{ viewTransitionName: `image-${index}` }}
                         />
                     ))}
                 </Carousel>
@@ -48,11 +47,16 @@ export const ProductDescription = ({ product }) => {
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                         Categoría: {product.category_name}
                     </p>
-                    <p className="flex gap-1">
-                        Tallas Disponibles: {product.sizes.map
-                            (size => <Badge color="info">{size.size.toUpperCase()}</Badge>)}</p>
+                    <div className='flex flex-col gap-3 justify-ceter'>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                            Tallas Disponibles:
+                        </p>
+                        <p className="flex flex-wrap gap-2">
+                            {product.sizes.map(size => <Badge color="info" key={size.id}>{size.size.toUpperCase()}</Badge>)}</p>
+                    </div>
+
                 </div>
-                <div className='flex justify-between gap-2' >
+                <div className='flex justify-between gap-2'>
                     <Link to="/" className="flex items-center underline underline-offset-4 text-cyan-700" >Volver</Link>
                     <Button className="bg-orange-500" onClick={() => handleAddToCart(product.id)}>Agregar al carrito</Button>
 

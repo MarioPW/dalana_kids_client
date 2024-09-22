@@ -24,14 +24,14 @@ export class CarouselService {
     }
     deleteCarouselItem(id) {
         try {
-            return axios.delete(`${this.apiURL}/carousel/${id}`, { headers: this.headers })
+            return axios.delete(`${this.apiURL}/carousel/{image_id}?id=${id}`, { headers: this.headers })
         } catch (error) {
             console.log(error)
         }
     }
-    updateCarouselItem(id, data) {
+    updateCarouselItem(data) {
         try {
-            return axios.put(`${this.apiURL}/carousel/${id}`, data, { headers: this.headers })
+            return axios.put(`${this.apiURL}/carousel`, data, { headers: this.headers })
         }
         catch (error) {
             console.log(error)
