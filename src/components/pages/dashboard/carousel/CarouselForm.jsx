@@ -8,22 +8,26 @@ export const CarouselForm = ({ currentImage }) => {
         slug: '',
         img_url: '',
         id: '',
-        imageFile: null
+        imageFile: null,
     })
     const productService = new ProductServices()
     const carouselService = new CarouselService()
 
     useEffect(() => {
-        setFormValues({
-            slug: currentImage.slug || '',
-            img_url: currentImage.img_url || ''
-        })
+        if (currentImage) {
+            setFormValues({
+                slug: currentImage.slug,
+                img_url: currentImage.img_url,
+                id: currentImage.id,
+                imageFile: null,
+            })
+        }
     }, [currentImage])
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-           let imageUrl = formValues.img_url
-            
+            let imageUrl = formValues.img_url
             if (formValues.imageFile) {
                 console.log("Subiendo imagen...")
                 const data = new FormData()
@@ -39,43 +43,48 @@ export const CarouselForm = ({ currentImage }) => {
                 }
                 const imageResponse = await res.json()
                 imageUrl = imageResponse.secure_url
-                const carouselItemSchema = {
-                    id: currentImage.id,
-                    slug: formValues.slug,
-                    img_url: imageUrl
-                }
-                const response = await carouselService.updateCarouselItem(carouselItemSchema)
-                console.log("Elemento de carrusel creado:", response.status === 200 ? "OK" : "FAIL")
+            }
+
+            const carouselItemSchema = {
+                slug: formValues.slug,
+                img_url: imageUrl
+            }
+
+            if (formValues.id) {
+                const response = await carouselService.updateCarouselItem({...carouselItemSchema, id: formValues.id})
+                console.log("Elemento de carrusel actualizado:", response.status === 200 ? "OK" : "FAIL")
             } else {
-                console.log("Imagen no subida")
-                const carouselItemSchema = {
-                    id: currentImage.id,
-                    slug: formValues.slug,
-                    img_url: imageUrl
-                }
-                const response = await carouselService.updateCarouselItem(carouselItemSchema)
+                const response = await carouselService.createCarouselItem(carouselItemSchema)
                 console.log("Elemento de carrusel creado:", response.status === 200 ? "OK" : "FAIL")
             }
+
         } catch (error) {
             console.error("Error al manejar el formulario:", error)
         }
     }
 
     const handleCancelButton = () => {
+        setFormValues({
+            slug: '',
+            img_url: '',
+            id: '',
+            imageFile: null,
+        })
         document.querySelector('#carouselForm').reset()
-        setFormValues({})
     }
+
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormValues({ ...formValues, [name]: value });
+        const { name, value } = e.target
+        setFormValues({ ...formValues, [name]: value })
     }
-        const handleImageChange = (e) => {
-        const file = e.target.files[0];
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0]
         if (file) {
-            setFormValues({ ...formValues, imageFile: file });
+            setFormValues({ ...formValues, imageFile: file })
         }
     }
-    
+
     return (
         <form onSubmit={handleSubmit} id="carouselForm">
             <div className="p-4 space-y-2">
@@ -103,7 +112,7 @@ export const CarouselForm = ({ currentImage }) => {
 
                 <div className="col-span-full">
                     <p className="block pt-4 text-sm font-medium leading-6 text-gray-900">
-                        Imágen <span className='italic text-gray-500'>(Seleccionar una imágen panorámica o de fondo; tomarla preferiblemente con el celu de lado ó fijarse que sea horizontal para que encaje bien en el carrusel.)</span>
+                        Imagen <span className='italic text-gray-500'>(Seleccionar una imagen panorámica o de fondo; preferiblemente horizontal para que encaje bien en el carrusel.)</span>
                     </p>
                     <div className="flex justify-center px-6 py-10 mt-2 border border-dashed rounded-lg border-gray-900/25">
                         <div className="text-center">
@@ -112,11 +121,11 @@ export const CarouselForm = ({ currentImage }) => {
                                 <label
                                     htmlFor="image"
                                     className="relative font-semibold text-indigo-600 bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-                                    <span>Cargar o Arrasrar Imagen</span>
-                                    <input id="image" name="image" type="file" className="sr-only" accept="image/*" onChange={handleImageChange}/>
+                                    <span>Cargar o Arrastrar Imagen</span>
+                                    <input id="image" name="image" type="file" className="sr-only" accept="image/*" onChange={handleImageChange} />
                                 </label>
                             </div>
-                            <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                            <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF hasta 10MB</p>
                         </div>
                     </div>
                 </div>
@@ -127,7 +136,8 @@ export const CarouselForm = ({ currentImage }) => {
                     <button
                         type="submit"
                         className="px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Actualizar</button>
+                        {formValues.id ? 'Actualizar' : 'Crear'}
+                    </button>
                 </div>
             </div>
         </form>

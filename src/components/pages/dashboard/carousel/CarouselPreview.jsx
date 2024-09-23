@@ -7,9 +7,10 @@ import { ConfirmDeletionModal } from '../../../utilities/ConfirmDeletionModal'
 export const CarouselPreview = () => {
   const [images, setImages] = useState([])
   const [currentImage, setCurrentImage] = useState(null)
+  const [openCarouselForm, setOpenCarouselForm] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
-  const [showDeleteModal, setShowDeleteModal] = useState(false)
   const carouselService = new CarouselService()
+
   useEffect(() => {
     const getCarouselSettings = async () => {
       try {
@@ -21,11 +22,20 @@ export const CarouselPreview = () => {
     }
     getCarouselSettings()
   }, [])
+
   const handleEditClick = () => {
-    setIsEditing(!isEditing)
+    setOpenCarouselForm(true)
+    setIsEditing(true)
   }
+
+  const handleAddItemClick = () => {
+    setOpenCarouselForm(true)
+    setIsEditing(false)
+    setCurrentImage(null) // Asegúrate de limpiar currentImage cuando agregues un nuevo elemento
+  }
+
   return (
-    <div className="h-56 sm:h-[600px] color-white">
+    <div className="h-56 sm:h-[600px] text-white">
       <Carousel leftControl="<" rightControl=">" slide={false} onSlideChange={(index) => setCurrentImage(images[index])}>
         {images && images.map((image, index) => (
           <div key={image.id} className="relative w-full h-full">
@@ -33,20 +43,22 @@ export const CarouselPreview = () => {
               src={image.img_url}
               alt={`Imagen del Carrusel ${index + 1}`}
               className="object-cover w-full h-full"
-            />{image.slug && <p className="absolute bottom-0 left-0 content-center w-full h-full p-2 text-center text-white bg-transparent">
-              {image.slug}
-            </p>}
+            />
+            {image.slug && (
+              <p className="absolute bottom-0 left-0 w-full p-2 text-center bg-black bg-opacity-50">
+                {image.slug}
+              </p>
+            )}
           </div>
-        ))
-        }
+        ))}
       </Carousel>
       <div className='flex justify-end gap-4 p-4'>
-        <Button color="blue" disabled={!currentImage} outline  onClick={() => handleEditClick()}>Agregar</Button>
-        <Button color="green" disabled={!currentImage}  onClick={() => handleEditClick()}>Editar</Button>
-        <ConfirmDeletionModal currentImage={currentImage} show={showDeleteModal} />
+        <Button color="blue" outline onClick={handleAddItemClick}>Agregar</Button>
+        <Button color="green" disabled={!currentImage} onClick={handleEditClick}>Editar</Button>
+        <ConfirmDeletionModal currentImage={currentImage} />
       </div>
-      {isEditing && (
-        <CarouselForm currentImage={currentImage} />
+      {openCarouselForm && (
+        <CarouselForm currentImage={isEditing ? currentImage : null} />
       )}
     </div>
   )
