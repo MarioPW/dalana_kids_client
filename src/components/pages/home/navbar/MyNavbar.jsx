@@ -5,18 +5,33 @@ import { LoginModal } from '../../login_register/LoginModal'
 import { useUserContext } from '../../../../context/UserContext';
 import { ShopingCart } from './ShopingCart';
 import { ProfileDropdown } from './ProfileDropdown'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { CategoriesService } from '../../../../services/categories';
 
 
 export const MyNavbar = () => {
+  const [ categories, setCategories ] = useState([])
   const { user } = useUserContext()
+  const categoriesService = new CategoriesService();
   const navigation = [
-    { name: 'Home', href: '/', color: 'bg-orange-500', current: false },
+    ...categories,
+    { name: 'Inicio', color: 'orange-500', current: false, href: '/' },
   ]
   
   const classNames = (...classes) => {
     classes.filter(Boolean).join(' ')}
-  useEffect(() => {}, [user]);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const res = await categoriesService.getAllCategories()
+        setCategories(res.data)
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
+    getCategories()
+  }, [user]);
 
   return (
     <div className='fixed top-0 z-50 w-full mx-auto'>
@@ -50,12 +65,9 @@ export const MyNavbar = () => {
                       {navigation.map((item) => (
                         <Link
                           key={item.name}
-                          to={item.href}
-                          className={classNames(
-                            item.current ? 'bg-white-600 text-white' : `${item.color} text-white hover:bg-green-500 hover:text-white`,
-                            'rounded-md px-3 py-2 text-sm font-medium'
-                          )}
-                          aria-current={item.current ? 'page' : undefined}
+                          to={item.href && item.href}
+                          className={`bg-${item.color} text-white hover:bg-green-500 hover:text-white
+                            rounded-md px-3 py-2 text-sm font-medium`}
                         >
                           {item.name}
                         </Link>
@@ -78,12 +90,8 @@ export const MyNavbar = () => {
                 {navigation.map((item) => (
                   <Link
                   key={item.name}
-                  to={item.href}
-                  className={classNames(
-                      item.current ? 'bg-blue-800 text-white' : 'text-gray-300 hover:bg-blue-700 hover:text-white',
-                      'block rounded-md px-3 py-2 text-base font-medium'
-                    )}
-                    aria-current={item.current ? 'page' : undefined}
+                  // to={item.href}
+                  className={'bg-blue-800 text-white hover:bg-blue-700 hover:text-white block text-center rounded-md px-3 py-2 text-base font-medium'}
                   >
                     {item.name}
                   </Link>
