@@ -26,9 +26,8 @@ export function MySideBar() {
                 console.log(error.message)
             }
         }
-        getCategories();
+        getCategories()
     }, [user])
-
 
     return (
         <div>

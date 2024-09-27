@@ -26,7 +26,7 @@ export class CategoriesService {
     }
     deleteCategory = async (id) => {
         try {
-            const response = await axios.delete(`${this.apiURL}/categories/${id}?id=${id}`, {
+            const response = await axios.delete(`${this.apiURL}/categories/{category_id}?id=${id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `bearer ${localStorage.getItem('token')}`

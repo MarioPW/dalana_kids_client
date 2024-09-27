@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
 import { TbMoodKid } from "react-icons/tb";
 import { Menu, Transition, MenuButton, MenuItems, MenuItem } from '@headlessui/react'
+import { RiAdminLine } from "react-icons/ri";
+import { HiArrowSmRight, HiInbox, HiShoppingBag, HiTable, HiUser, HiCog,  HiLogout } from "react-icons/hi";
 import { Link } from 'react-router-dom'
 import { useUserContext } from '../../../../context/UserContext'
 
@@ -24,10 +26,9 @@ export const ProfileDropdown = ({ user }) => {
                     <img
                         className="w-8 h-8 rounded-full"
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt0XikLERJ8A3kTEC6_j9lMiLFu7-27j_AyA&s"
-                        alt= {user.name ? user.name : user.email}
+                        alt={user.name ? user.name : user.email}
                     />
                 </MenuButton>
-
             </div>
             <Transition
                 as={Fragment}
@@ -40,39 +41,29 @@ export const ProfileDropdown = ({ user }) => {
             >
                 <MenuItems className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <MenuItem>
-                        {({ active }) => (
-                            <a
-                                href="#"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            >
-                                Your Profile
-                            </a>
-                        )}
+                        {user.role === "admin" && <Link
+                            className="flex items-center px-3 py-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            to="/dashboard">
+                            <RiAdminLine className="mr-2" />Dashboard</Link>}
                     </MenuItem>
                     <MenuItem>
-                        {({ active }) => (
-                            <a
-                                href="#"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            >
-                                {user.name ? user.name : user.email}
-                            </a>
-                        )}
+                        <Link
+                            className="flex items-center px-3 py-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            to="/dashboard">
+                            <HiUser className="mr-2" />Mi Perfil</Link>
                     </MenuItem>
                     <MenuItem>
-                        {({ active }) => (
-                            <a href="#" className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            >Settings</a>
-                        )}
+                        <Link
+                            className="flex items-center px-3 py-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            to="/dashboard">
+                            <HiCog className="mr-2" />Configuración</Link>
                     </MenuItem>
                     <MenuItem>
-                        {({ active }) => (
                             <Link
                                 to="/"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                               className="flex items-center px-3 py-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                                 onClick={handleSignOut}>
-                                Cerrar Sesión</Link>
-                        )}
+                               <HiLogout className="mr-2" />Cerrar Sesión</Link>
                     </MenuItem>
                 </MenuItems>
             </Transition>

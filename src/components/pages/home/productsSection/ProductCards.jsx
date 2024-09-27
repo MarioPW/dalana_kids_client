@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ProductServices } from "../../../../services/products";
 import { ProductRating } from "../../../utilities/Rating";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ProductCardsSkeleton } from "./skeletons/ProductCardsSkeleton";
 import { Badge } from "flowbite-react";
 
@@ -9,20 +9,29 @@ import { Badge } from "flowbite-react";
 export function ProductCards() {
   const productServices = new ProductServices()
   const [products, setProducts] = useState()
+  const { category } = useParams()
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await productServices.getAllProducts();
-        if (res.data) {
-          setProducts(res.data)
+        if (category) {
+          const res = await productServices.getProductsByCategory(category)
+          if (res.data) {
+            setProducts(res.data)
+          }
+        } else {
+          const res = await productServices.getAllProducts();
+          if (res.data) {
+            setProducts(res.data)
+          }
         }
+
       } catch (error) {
         console.log(error.message)
       }
     }
     fetchProducts();
-  }, [])
+  }, [category])
   return (
     <div className="block grid-cols-2 py-4 ps-4 sm:grid sm:gap-2 lg:grid-cols-3 xl:grid-cols-4">
       {!products ? <ProductCardsSkeleton amount={12} /> : products.map(product => (

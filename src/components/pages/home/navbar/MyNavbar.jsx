@@ -8,18 +8,18 @@ import { ProfileDropdown } from './ProfileDropdown'
 import { useEffect, useState } from 'react';
 import { CategoriesService } from '../../../../services/categories';
 
-
 export const MyNavbar = () => {
-  const [ categories, setCategories ] = useState([])
+  const [categories, setCategories] = useState([])
   const { user } = useUserContext()
   const categoriesService = new CategoriesService();
   const navigation = [
+    { name: 'Inicio', color: 'orange-500', current: false, href: '/', id: 1 },
     ...categories,
-    { name: 'Inicio', color: 'orange-500', current: false, href: '/' },
   ]
-  
+
   const classNames = (...classes) => {
-    classes.filter(Boolean).join(' ')}
+    classes.filter(Boolean).join(' ')
+  }
 
   useEffect(() => {
     const getCategories = async () => {
@@ -35,7 +35,7 @@ export const MyNavbar = () => {
 
   return (
     <div className='fixed top-0 z-50 w-full mx-auto'>
-      <Disclosure as="nav" className="mx-auto bg-yellow-300 rounded-b-md max-w-7xl">
+      <Disclosure as="nav" className="mx-auto bg-yellow-200 rounded-b-md max-w-7xl">
         {({ open }) => (
           <>
             <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -60,14 +60,20 @@ export const MyNavbar = () => {
                       alt="Dalana Kids Logo"
                     />
                   </a>
-                  <div className="hidden sm:ml-6 sm:block">
-                    <div className="flex space-x-4">
+                  <div className="hidden w-full sm:ml-6 sm:block">
+                    <div className="flex justify-around">
                       {navigation.map((item) => (
                         <Link
-                          key={item.name}
-                          to={item.href && item.href}
-                          className={`bg-${item.color} text-white hover:bg-green-500 hover:text-white
-                            rounded-md px-3 py-2 text-sm font-medium`}
+                          key={item.id}
+                          to={item.href ? item.href : `/${item.name}`}
+                          className={`text-${item.color} underline hover:text-white
+                            rounded-md px-3 py-2 text-lg`}
+                          style={{
+                            fontFamily: "Luckiest Guy",
+                            textDecorationThickness: '2px',
+                            textUnderlineOffset: '4px',
+                            textSpacing: '6px',
+                          }}
                         >
                           {item.name}
                         </Link>
@@ -79,8 +85,8 @@ export const MyNavbar = () => {
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   {user && <ShopingCart />}
                   {/* Profile dropdown */}
-                 {user ? <ProfileDropdown user={user} /> : <LoginModal />}
-                  
+                  {user ? <ProfileDropdown user={user} /> : <LoginModal />}
+
                 </div>
               </div>
             </div>
@@ -89,9 +95,8 @@ export const MyNavbar = () => {
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
                   <Link
-                  key={item.name}
-                  // to={item.href}
-                  className={'bg-blue-800 text-white hover:bg-blue-700 hover:text-white block text-center rounded-md px-3 py-2 text-base font-medium'}
+                    key={item.name}
+                    className={`bg-${item.color} text-white hover:bg-blue-700 hover:text-white block text-center rounded-md px-3 py-2 text-base font-medium`}
                   >
                     {item.name}
                   </Link>

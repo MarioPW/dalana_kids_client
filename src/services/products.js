@@ -18,6 +18,13 @@ export class ProductServices {
                console.error('Error al hacer la solicitud:', error.message);
           }
      }
+     getProductsByCategory = (category) => {
+          try {
+               return axios.get(`${this.apiURL}/products/categories/${category}`)
+          } catch (error) {
+               console.error('Error al hacer la solicitud:', error.message);
+          }
+     }
      getProductById = (id) => {
           try {
                return axios.get(`${this.apiURL}/products/{product_id}?id=${id}`)

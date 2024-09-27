@@ -17,7 +17,7 @@ function App() {
       <div className='w-full mx-auto mt-16 sm:max-w-7xl'>
         <Routes>
           <Route path='/' element={<Home />}>
-            <Route path="/" element={<ProductCards />} />
+            <Route path="/:category?" element={<ProductCards />} />
             <Route path="/description/:id" element={<DescriptionCard />} />
           </Route>
           <Route path='/register' element={<RegisterForm />} />

@@ -11,27 +11,27 @@ export const CarouselPreview = () => {
   const [isEditing, setIsEditing] = useState(false)
   const carouselService = new CarouselService()
 
-  useEffect(() => {
-    const getCarouselSettings = async () => {
-      try {
-        const res = await carouselService.getCarousel()
-        setImages(res.data)
-      } catch (error) {
-        console.log(error.message)
-      }
+  const getCarouselSettings = async () => {
+    try {
+      const res = await carouselService.getCarousel()
+      setImages(res.data)
+    } catch (error) {
+      console.log(error.message)
     }
+  }
+  useEffect(() => {
     getCarouselSettings()
   }, [])
 
   const handleEditClick = () => {
-    setOpenCarouselForm(true)
+    setOpenCarouselForm(!openCarouselForm)
     setIsEditing(true)
   }
 
   const handleAddItemClick = () => {
-    setOpenCarouselForm(true)
+    setOpenCarouselForm(!openCarouselForm)
     setIsEditing(false)
-    setCurrentImage(null) // Asegúrate de limpiar currentImage cuando agregues un nuevo elemento
+    setCurrentImage(null)
   }
 
   return (
@@ -53,12 +53,12 @@ export const CarouselPreview = () => {
         ))}
       </Carousel>
       <div className='flex justify-end gap-4 p-4'>
-        <Button color="blue" outline onClick={handleAddItemClick}>Agregar</Button>
+        <Button color="blue" outline onClick={handleAddItemClick}>Agregar Nuevo</Button>
         <Button color="green" disabled={!currentImage} onClick={handleEditClick}>Editar</Button>
-        <ConfirmDeletionModal currentImage={currentImage} />
+        <ConfirmDeletionModal item={currentImage} onDeleteClass={CarouselService} onDeleteMethod="deleteCarouselItem" itemType="producto"/>
       </div>
       {openCarouselForm && (
-        <CarouselForm currentImage={isEditing ? currentImage : null} />
+        <CarouselForm currentImage={isEditing && currentImage} />
       )}
     </div>
   )

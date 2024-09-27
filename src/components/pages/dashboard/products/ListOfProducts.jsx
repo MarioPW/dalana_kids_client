@@ -28,7 +28,7 @@ export const ListOfProducts = () => {
       }
     }
     fetchProducts();
-  }, [products])
+  }, [])
   const handelSelection = (e) => {
     if (e.target.checked) {
       const selectedProduct = products.filter ((item) => item.id === e.target.value)
@@ -39,7 +39,7 @@ export const ListOfProducts = () => {
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 ">
       <div className="flex items-center justify-between w-full border-b-2 border-gray-300 border-solid">
-          <p>Lista de Productos DalanaKids</p>
+      <h2 className="font-semibold leading-7 text-purple-600 text-2x2">Lista de Productos DalanaKids</h2>
         <div className="flex items-center h-16 gap-x-6">
           <CiEdit />
           <ConfirmDeletion />
