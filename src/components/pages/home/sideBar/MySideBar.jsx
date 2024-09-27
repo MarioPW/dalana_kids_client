@@ -44,10 +44,10 @@ export function MySideBar() {
                 <Sidebar aria-label="Sidebar with multi-level dropdown example">
                     <Sidebar.Items className="pt-6">
                         <Sidebar.ItemGroup>
-                            {user.role === "admin" && <Link
+                            {/* {user.role === "admin" && <Link
                                 className="flex items-center px-3 py-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                                 to="/dashboard">
-                                <RiAdminLine className="mr-2"/>Dashboard</Link>}
+                                <RiAdminLine className="mr-2"/>Dashboard</Link>} */}
                             <Sidebar.Collapse icon={HiShoppingBag} label="Categorías">
                                 {categories && categories.map((category) => (
                                     <Sidebar.Item key={category.id} href="#">{category.name}</Sidebar.Item>

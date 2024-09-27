@@ -12,7 +12,7 @@ export const Dashboard = () => {
   const [isOpenCarousel, setIsOpenCarousel] = useState(false);
 
   return (
-    <div className="block w-full mt-12 sm:text-left sm:w-5/6">
+    <div className="block w-full m-auto mt-12 sm:text-left sm:w-5/6">
       <div>
         <button 
         type="button"

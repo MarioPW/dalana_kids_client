@@ -42,9 +42,8 @@ export const MyNavbar = () => {
               <div className="relative flex items-center justify-between h-16">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
-                  <DisclosureButton className="relative inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-green-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <DisclosureButton className="relative inline-flex items-center justify-center p-2 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="absolute -inset-0.5" />
-                    <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XMarkIcon className="block w-6 h-6" aria-hidden="true" />
                     ) : (
@@ -95,8 +94,13 @@ export const MyNavbar = () => {
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
                   <Link
+                    to={item.href ? item.href : `/${item.name}`}
                     key={item.name}
-                    className={`bg-${item.color} text-white hover:bg-blue-700 hover:text-white block text-center rounded-md px-3 py-2 text-base font-medium`}
+                    className={`text-${item.color} bg-white block text-center rounded-md px-3 py-2 text-base font-medium`}
+                    style={{
+                      fontFamily: "Luckiest Guy",
+                      fontSize: '20px',
+                    }}
                   >
                     {item.name}
                   </Link>
