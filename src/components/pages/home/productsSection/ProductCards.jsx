@@ -3,8 +3,6 @@ import { ProductServices } from "../../../../services/products";
 import { ProductRating } from "../../../utilities/Rating";
 import { Link, useParams } from "react-router-dom";
 import { ProductCardsSkeleton } from "./skeletons/ProductCardsSkeleton";
-import { Badge } from "flowbite-react";
-
 
 export function ProductCards() {
   const productServices = new ProductServices()
@@ -53,18 +51,6 @@ export function ProductCards() {
               <h4 className="text-lg tracking-tight text-purple-900 dark:text-white">
                 {product.name}
               </h4>
-
-              {/* <p className="font-normal text-red-700 dark:text-gray-400">
-                Marca: {product.brand}
-              </p> */}
-              {/* <div className='flex flex-col gap-3 justify-ceter'>
-                <p className="text-gray-600 text-md dark:text-gray-400">
-                  Tallas Disponibles:
-                </p>
-                <p className="flex flex-wrap gap-1">
-                  {product.sizes.map
-                    (size => <Badge color="info" key={size.id}>{size.size.toUpperCase()}</Badge>)}</p>
-              </div> */}
               <ProductRating />
             </div>
           </div></Link>

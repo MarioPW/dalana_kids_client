@@ -16,7 +16,14 @@ export const MyNavbar = () => {
     { name: 'Inicio', color: 'orange-500', current: false, href: '/', id: 1 },
     ...categories,
   ]
-
+  const colors = [
+    'text-blue-500',
+    'text-yellow-400',
+    'text-red-500',
+    'text-orange-500',
+    'text-green-500',
+    'text-purple-700',
+  ];
   const classNames = (...classes) => {
     classes.filter(Boolean).join(' ')
   }
@@ -61,11 +68,11 @@ export const MyNavbar = () => {
                   </a>
                   <div className="hidden w-full sm:ml-6 sm:block">
                     <div className="flex justify-around">
-                      {navigation.map((item) => (
+                      {navigation.map((item, index) => (
                         <Link
                           key={item.id}
                           to={item.href ? item.href : `/${item.name}`}
-                          className={`text-${item.color} underline hover:text-white
+                          className={`${colors[index % colors.length]} underline hover:text-white
                             rounded-md px-3 py-2 text-lg`}
                           style={{
                             fontFamily: "Luckiest Guy",
