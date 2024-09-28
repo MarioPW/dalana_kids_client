@@ -39,7 +39,7 @@ export const Home = () => {
                    <div className="flex items-center justify-center w-full py-2 my-6 bg-yellow-100" >
                         <ColorfulWord word="CATÁLOGO DE PRODUCTOS" size="text-xl sm:text-3xl" />
                     </div>
-                    <div className='flex'>
+                    <div className='sm:flex'>
                     <MySideBar />
                     <Outlet />
                     </div>
