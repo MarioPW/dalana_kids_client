@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Carousel, Badge } from "flowbite-react";
 import { Link } from "react-router-dom";
+import { PriceFormatter } from '../../../utilities/PriceFormater';
 
 
 export const ProductDescription = ({ product }) => {
@@ -36,7 +37,7 @@ export const ProductDescription = ({ product }) => {
                         {product.description}
                     </p>
                     <p className="text-2xl font-semibold text-indigo-600">
-                        ${product.price}
+                        $<PriceFormatter>{product.price}</PriceFormatter>
                     </p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                         Stock disponible: {product.stock}

@@ -3,6 +3,7 @@ import { ProductServices } from "../../../../services/products";
 import { ProductRating } from "../../../utilities/Rating";
 import { Link, useParams } from "react-router-dom";
 import { ProductCardsSkeleton } from "./skeletons/ProductCardsSkeleton";
+import { PriceFormatter } from "../../../utilities/PriceFormater";
 
 export function ProductCards() {
   const productServices = new ProductServices()
@@ -46,7 +47,7 @@ export function ProductCards() {
             </div>
             <div className="flex flex-col justify-between flex-grow ms-3 sm:mt-1">
               <p className="text-2xl font-semibold text-indigo-600">
-                $ {product.price}
+                $ <PriceFormatter>{product.price}</PriceFormatter>
               </p>
               <h4 className="text-lg tracking-tight text-purple-900 dark:text-white">
                 {product.name}

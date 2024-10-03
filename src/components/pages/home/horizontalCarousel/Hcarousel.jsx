@@ -16,6 +16,7 @@ import { ProductCardsSkeleton } from "../productsSection/skeletons/ProductCardsS
 import { Link } from "react-router-dom";
 import { ProductRating } from "../../../utilities/Rating";
 import { useEffect, useState } from "react";
+import { PriceFormatter } from "../../../utilities/PriceFormater";
 
 export const Hcarousel = () => {
   const { productService } = useUserContext()
@@ -78,7 +79,7 @@ export const Hcarousel = () => {
                 </div>
                 <div className="flex flex-col justify-between flex-grow ms-3 sm:mt-1">
                   <p className="text-xl font-semibold text-indigo-600">
-                    $ {product.price}
+                    $ <PriceFormatter>{product.price}</PriceFormatter>
                   </p>
                   <h4 className="tracking-tight text-purple-900 text-md dark:text-white">
                     {product.name}
